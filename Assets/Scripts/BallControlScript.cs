@@ -19,6 +19,7 @@ public class BallControlScript : MonoBehaviour {
 	static bool moveAllowed;
 	static bool youWin;
 	static bool keyPickedUp;
+	static bool showKeyTip;
 
 	[SerializeField]
 	GameObject winText = default;
@@ -32,6 +33,7 @@ public class BallControlScript : MonoBehaviour {
 		moveAllowed = true;
 		isDead = false;
 		keyPickedUp = false;
+		showKeyTip = false;
 		// Getting Rigidbody2D component of the ball game object
 		rb = GetComponent<Rigidbody2D> ();
 		// Getting Animator component of the ball game object
@@ -52,12 +54,14 @@ public class BallControlScript : MonoBehaviour {
 			anim.SetBool ("BallDead", isDead);
 			Invoke ("RestartScene", 1f);
 		}
-		if (youWin) {
+		else if (youWin) {
 			winText.gameObject.SetActive(true);
 			moveAllowed = false;
 			anim.SetBool("BallDead", true);
 			// Restart scene to play again in 2 seconds
 			Invoke ("RestartScene", 2f);
+		} else if(showKeyTip) {
+			noKeyTip.gameObject.SetActive(true);
 		}
 	}
 
@@ -88,7 +92,7 @@ public class BallControlScript : MonoBehaviour {
 	}
 
 	public static void PickUpKey()
-    {
+	{
 		keyPickedUp = true;
 
 	}
@@ -96,11 +100,11 @@ public class BallControlScript : MonoBehaviour {
 	public static void OpenLocker()
 	{
 		if (keyPickedUp)
-        {
+		{
 			youWin = true;
 		} else
-        {
-			noKeyTip.gameObject.SetActive(true);
+		{
+			showKeyTip = true;
 		}
 
 	}
