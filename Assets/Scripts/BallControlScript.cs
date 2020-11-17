@@ -25,10 +25,16 @@ public class BallControlScript : MonoBehaviour {
 	GameObject winText = default;
 	[SerializeField]
 	GameObject noKeyTip = default;
+  [SerializeField]
+	GameObject deathText = default;
+  [SerializeField]
+	GameObject keyUI = default;
 
 	void Start () {
 		winText.gameObject.SetActive(false);
 		noKeyTip.gameObject.SetActive(false);
+    deathText.gameObject.SetActive(false);
+    keyUI.gameObject.SetActive(false);
 		youWin = false;
 		moveAllowed = true;
 		isDead = false;
@@ -41,7 +47,7 @@ public class BallControlScript : MonoBehaviour {
 		// Set BallAlive animation
 		anim.SetBool ("BallDead", isDead);
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		// Getting devices accelerometer data in X and Y direction
@@ -51,16 +57,24 @@ public class BallControlScript : MonoBehaviour {
 
 		if (isDead) {
 			rb.velocity = new Vector2 (0, 0);
+      moveAllowed = false;
+      keyUI.gameObject.SetActive(false);
+      deathText.gameObject.SetActive(true);
 			//anim.SetBool ("BallDead", isDead);
-			Invoke ("RestartScene", 1f);
-		}
-		else if (youWin) {
+			Invoke ("RestartScene", 3f);
+		} else if (youWin) {
+      rb.velocity = new Vector2 (0, 0);
 			winText.gameObject.SetActive(true);
 			moveAllowed = false;
 			//anim.SetBool("BallDead", true);
 			// Restart scene to play again in 2 seconds
+      keyUI.gameObject.SetActive(false);
 			Invoke ("RestartScene", 6f);
-		} else if(showKeyTip) {
+		}
+    if(keyPickedUp) {
+      keyUI.gameObject.SetActive(true);
+    }
+    if(showKeyTip) {
 			noKeyTip.gameObject.SetActive(true);
 		}
 	}
@@ -94,11 +108,11 @@ public class BallControlScript : MonoBehaviour {
 	public static void PickUpKey()
 	{
 		keyPickedUp = true;
-
 	}
 
 	public static void OpenLocker()
 	{
+    showKeyTip = false;
 		if (keyPickedUp)
 		{
 			youWin = true;
