@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6271955636179901647}
   - component: {fileID: 6271955636179901646}
   - component: {fileID: 4333113199920986121}
+  - component: {fileID: 1202428726632522687}
   m_Layer: 0
   m_Name: Asteroids_Edge
   m_TagString: Untagged
@@ -92,7 +93,7 @@ EdgeCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -1.55}
@@ -100,3 +101,15 @@ EdgeCollider2D:
   m_Points:
   - {x: -5.73, y: 0}
   - {x: 5.73, y: 0}
+--- !u!114 &1202428726632522687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6271955636179901644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8443d9c0e54045345b82fb2259cfdb9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -51,15 +51,15 @@ public class BallControlScript : MonoBehaviour {
 
 		if (isDead) {
 			rb.velocity = new Vector2 (0, 0);
-			anim.SetBool ("BallDead", isDead);
+			//anim.SetBool ("BallDead", isDead);
 			Invoke ("RestartScene", 1f);
 		}
 		else if (youWin) {
 			winText.gameObject.SetActive(true);
 			moveAllowed = false;
-			anim.SetBool("BallDead", true);
+			//anim.SetBool("BallDead", true);
 			// Restart scene to play again in 2 seconds
-			Invoke ("RestartScene", 2f);
+			Invoke ("RestartScene", 6f);
 		} else if(showKeyTip) {
 			noKeyTip.gameObject.SetActive(true);
 		}
